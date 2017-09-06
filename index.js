@@ -13,7 +13,7 @@ import {Main} from './src/main';
 const Base = function() {
     return (
         <div>
-           <Main loading='' />
+           <Main />
         </div>
     );
 };
