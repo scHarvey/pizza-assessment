@@ -6,6 +6,9 @@ export class Loading extends Component {
         message: React.PropTypes.string.isRequired
     }
 */
+    constructor() {
+        super();
+    }
 
     render() {
         return (

@@ -1,11 +1,15 @@
 import React, {Component} from 'react';
 
 export class Filter extends Component {
+    constructor() {
+        super();
+    }
+
     render() {
         return (
-            <div>
-
-            </div>
+            <form>
+                <input type="text" placeholder="Filter..." />
+            </form>
         );
     }
 }

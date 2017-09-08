@@ -3,8 +3,8 @@ import fetch from 'isomorphic-fetch';
 
 import {Loading} from './loading';
 import {Results} from './results';
-//import {Filter} from './filter';
-//import {Sort} from './sort';
+import {Filter} from './filter';
+import {Sort} from './sort';
 
 export class Main extends Component {
 /* having issues with proptype definitions in your version of React. Everything is working without defining them so I'm just leaving these here as a note.
@@ -28,8 +28,16 @@ I'm more used to the 15.5+ implementation where prop-types is its own component 
 
     }
 
+    filterPizzas(){
+
+    }
+
+    sortPizzas(){
+
+    }
+
+
     loadPizzas() {
-        var _this = this;
         console.log('fetching');
         fetch(`/pizza.json`)
         .then((response) => {
@@ -39,7 +47,8 @@ I'm more used to the 15.5+ implementation where prop-types is its own component 
             return response.json();
         })
         .then((response) => {
-            this.setState({ pizzas: new Array(...response.pizzas), loading: false });
+            const pizzas = new Array(...response.pizzas);
+            this.setState({ pizzas, loading: false });
         })
         .catch(err => console.error(err));
 
@@ -55,6 +64,7 @@ I'm more used to the 15.5+ implementation where prop-types is its own component 
 
         return (
             <div>
+                <Filter callback={this.filterPizzas.bind(this)} /> <Sort callback={this.sortPizzas.bind(this)} />
                 <Results pizzas={this.state.pizzas} />
             </div>
         );
