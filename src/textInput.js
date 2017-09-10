@@ -16,7 +16,7 @@ export class TextInput extends Component {
     }
     render() {
         return (
-            <form>
+            <form style={{display: 'inline'}}>
                 <input id="TextInput" type="text" placeholder={this.props.placeholder} onKeyUp={(e) => this.handleTextInput(e, this)} />
             </form>
         );

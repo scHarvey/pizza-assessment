@@ -93,7 +93,7 @@ I'm more used to the 15.5+ implementation where prop-types is its own component 
         return (
             <div>
                 <TextInput placeholder='Filter...' callback={this.filterPizzas.bind(this)} /> <SimpleButton callback={this.sortPizzas.bind(this)} buttonText=' Sort ' />
-                <Results pizzas={this.state.filteredPizzas} />
+                <Results listPrefix="🍕" pizzas={this.state.filteredPizzas} />
             </div>
         );
     }
