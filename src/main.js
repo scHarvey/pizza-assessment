@@ -40,10 +40,20 @@ I'm more used to the 15.5+ implementation where prop-types is its own component 
         });
     }
 
-    sortPizzas() {
+    sortPizzas(e) {
+        let pizzas = this.state.filteredPizzas;
 
+        if (this.state.sortAsc) {
+            pizzas = pizzas.sort((a,b) => (a < b ? -1 : 1));
+        } else {
+            pizzas = pizzas.sort((a,b) => (a > b ? -1 : 1));
+        }
+
+        this.setState({
+            filteredPizzas: pizzas,
+            sortAsc: !this.state.sortAsc
+        });
     }
-
 
     loadPizzas() {
         console.log('fetching');

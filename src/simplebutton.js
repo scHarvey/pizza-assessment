@@ -6,14 +6,13 @@ export class SimpleButton extends Component {
         super();
     }
 
-    buttonClick(e) {
-
-        this.props.callback();
+    buttonClick(e, _this) {
+        _this.props.callback(e);
     }
 
     render() {
         return (
-            <button onClick={this.buttonClick}>{this.props.buttonText}</button>
+            <button onClick={(e) => this.buttonClick(e, this)}>{this.props.buttonText}</button>
         );
     }
 }
