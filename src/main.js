@@ -3,8 +3,8 @@ import fetch from 'isomorphic-fetch';
 
 import {Loading} from './loading';
 import {Results} from './results';
-import {Filter} from './filter';
-import {Sort} from './sort';
+import {CaseInsensitiveTextInput} from './caseInsensitiveTextInput';
+import {SimpleButton} from './simplebutton';
 
 export class Main extends Component {
 /* having issues with proptype definitions in your version of React. Everything is working without defining them so I'm just leaving these here as a note.
@@ -17,7 +17,10 @@ I'm more used to the 15.5+ implementation where prop-types is its own component 
         super();
         this.state = {
             pizzas: [],
-            loading: true
+            filteredPizzas: [],
+            loading: true,
+            sortAsc: true,
+            filtered: false
         };
     }
 
@@ -28,11 +31,13 @@ I'm more used to the 15.5+ implementation where prop-types is its own component 
 
     }
 
-    filterPizzas(){
-
+    filterPizzas(filter) {
+        console.log(filter)
+        let pizzas = this.state.pizzas;
+        currentPizzas(pizzas);
     }
 
-    sortPizzas(){
+    sortPizzas() {
 
     }
 
@@ -48,12 +53,18 @@ I'm more used to the 15.5+ implementation where prop-types is its own component 
         })
         .then((response) => {
             const pizzas = new Array(...response.pizzas);
-            this.setState({ pizzas, loading: false });
+            this.setState({ pizzas, filteredPizzas: pizzas, loading: false });
         })
         .catch(err => console.error(err));
 
     }
 
+    /*
+    currentPizzas(pizzas = this.state.pizzas) {
+
+        return pizzas;
+    }
+    */
     render() {
 
         if (this.state.loading) {
@@ -64,8 +75,8 @@ I'm more used to the 15.5+ implementation where prop-types is its own component 
 
         return (
             <div>
-                <Filter callback={this.filterPizzas.bind(this)} /> <Sort callback={this.sortPizzas.bind(this)} />
-                <Results pizzas={this.state.pizzas} />
+                <CaseInsensitiveTextInput callback={this.filterPizzas.bind(this)} /> <SimpleButton callback={this.sortPizzas.bind(this)} buttonText=' Sort ' />
+                <Results pizzas={this.state.filteredPizzas} />
             </div>
         );
     }
