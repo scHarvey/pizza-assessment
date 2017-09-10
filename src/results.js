@@ -6,7 +6,7 @@ export class Results extends Component {
         return (
             <div>
                 <ul>
-                    {this.props.pizzas.map((pizza) => <li>{pizza}</li>)}
+                    {this.props.pizzas.map((pizza, i) => <li key={i}>{pizza}</li>)}
                 </ul>
             </div>
         );

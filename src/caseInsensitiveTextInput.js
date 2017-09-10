@@ -4,13 +4,15 @@ export class CaseInsensitiveTextInput extends Component {
     constructor() {
         super();
     }
-    handleTextInput(e) {
-        this.props.callback(e);
+
+    handleTextInput (e, _this) {
+        const textValue = document.querySelector('#CaseInsensitiveTextInput');
+        _this.props.callback(textValue.value.toLowerCase());
     }
     render() {
         return (
             <form>
-                <input type="text" placeholder={this.props.placeholder} onKeyUp={this.handleTextInput} />
+                <input id="CaseInsensitiveTextInput" type="text" placeholder={this.props.placeholder} onKeyUp={(e) => this.handleTextInput(e, this)} />
             </form>
         );
     }

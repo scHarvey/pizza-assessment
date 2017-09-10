@@ -32,9 +32,12 @@ I'm more used to the 15.5+ implementation where prop-types is its own component 
     }
 
     filterPizzas(filter) {
-        console.log(filter)
+        console.log(filter);
         let pizzas = this.state.pizzas;
-        currentPizzas(pizzas);
+
+        this.setState({
+            filteredPizzas: pizzas.filter(pizza => pizza.toLowerCase().includes(filter))
+        });
     }
 
     sortPizzas() {
@@ -59,12 +62,6 @@ I'm more used to the 15.5+ implementation where prop-types is its own component 
 
     }
 
-    /*
-    currentPizzas(pizzas = this.state.pizzas) {
-
-        return pizzas;
-    }
-    */
     render() {
 
         if (this.state.loading) {
@@ -75,7 +72,7 @@ I'm more used to the 15.5+ implementation where prop-types is its own component 
 
         return (
             <div>
-                <CaseInsensitiveTextInput callback={this.filterPizzas.bind(this)} /> <SimpleButton callback={this.sortPizzas.bind(this)} buttonText=' Sort ' />
+                <CaseInsensitiveTextInput placeholder='Filter...' callback={this.filterPizzas.bind(this)} /> <SimpleButton callback={this.sortPizzas.bind(this)} buttonText=' Sort ' />
                 <Results pizzas={this.state.filteredPizzas} />
             </div>
         );
