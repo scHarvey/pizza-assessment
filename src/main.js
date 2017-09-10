@@ -3,7 +3,7 @@ import fetch from 'isomorphic-fetch';
 
 import {Loading} from './loading';
 import {Results} from './results';
-import {CaseInsensitiveTextInput} from './caseInsensitiveTextInput';
+import {TextInput} from './textInput';
 import {SimpleButton} from './simplebutton';
 
 export class Main extends Component {
@@ -24,22 +24,30 @@ I'm more used to the 15.5+ implementation where prop-types is its own component 
         };
     }
 
-
+    /**
+    * @method componentWillMount - calls our loader function on component mount
+    */
     componentWillMount() {
-        console.log('mounting');
         this.loadPizzas();
 
     }
 
+    /**
+    * @method filterPizzas - filters our pizza list based on text input. Case Insensitive
+    * @param {string} filter - string upon which to filter our pizza list
+    */
     filterPizzas(filter) {
-        console.log(filter);
         let pizzas = this.state.pizzas;
 
         this.setState({
-            filteredPizzas: pizzas.filter(pizza => pizza.toLowerCase().includes(filter))
+            filteredPizzas: pizzas.filter(pizza => pizza.toLowerCase().includes(filter.toLowerCase()))
         });
     }
 
+    /**
+    * @method sortPizzas - sorts our pizza list alpha/reverse alpha
+    * @param {event} e - event passed back from our sort button, in case we wanted to add some more complex handling
+    */
     sortPizzas(e) {
         let pizzas = this.state.filteredPizzas;
 
@@ -55,8 +63,10 @@ I'm more used to the 15.5+ implementation where prop-types is its own component 
         });
     }
 
+    /**
+    * @method loadPizzas - loads are pizzas from the local json file and saves it in state
+    */
     loadPizzas() {
-        console.log('fetching');
         fetch(`/pizza.json`)
         .then((response) => {
             if (response.status >= 400) {
@@ -82,7 +92,7 @@ I'm more used to the 15.5+ implementation where prop-types is its own component 
 
         return (
             <div>
-                <CaseInsensitiveTextInput placeholder='Filter...' callback={this.filterPizzas.bind(this)} /> <SimpleButton callback={this.sortPizzas.bind(this)} buttonText=' Sort ' />
+                <TextInput placeholder='Filter...' callback={this.filterPizzas.bind(this)} /> <SimpleButton callback={this.sortPizzas.bind(this)} buttonText=' Sort ' />
                 <Results pizzas={this.state.filteredPizzas} />
             </div>
         );
