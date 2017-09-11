@@ -56,9 +56,9 @@ I'm more used to the 15.5+ implementation where prop-types is its own component 
         let pizzas = this.state.filteredPizzas;
 
         if (this.state.sortAsc) {
-            pizzas = pizzas.sort((a,b) => (a < b ? -1 : 1));
+            pizzas = pizzas.sort((a,b) => (a.toLowerCase() < b.toLowerCase() ? -1 : 1));
         } else {
-            pizzas = pizzas.sort((a,b) => (a > b ? -1 : 1));
+            pizzas = pizzas.sort((a,b) => (a.toLowerCase() > b.toLowerCase() ? -1 : 1));
         }
 
         this.setState({
