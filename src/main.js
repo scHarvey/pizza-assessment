@@ -19,8 +19,12 @@ I'm more used to the 15.5+ implementation where prop-types is its own component 
             pizzas: [],
             filteredPizzas: [],
             loading: true,
-            sortAsc: true,
-            filtered: false
+            sortAsc: false,
+            sortIcon: [
+                '⬆️',
+                '⬇️'
+            ],
+            sortIndicator: '↕️'
         };
     }
 
@@ -59,7 +63,8 @@ I'm more used to the 15.5+ implementation where prop-types is its own component 
 
         this.setState({
             filteredPizzas: pizzas,
-            sortAsc: !this.state.sortAsc
+            sortAsc: !this.state.sortAsc,
+            sortIndicator: this.state.sortIcon[(this.state.sortAsc ? 1 : 0)]
         });
     }
 
@@ -92,7 +97,7 @@ I'm more used to the 15.5+ implementation where prop-types is its own component 
 
         return (
             <div>
-                <TextInput placeholder='Filter...' callback={this.filterPizzas.bind(this)} /> <SimpleButton callback={this.sortPizzas.bind(this)} buttonText=' Sort ' />
+                <TextInput placeholder='Filter...' callback={this.filterPizzas.bind(this)} /> <SimpleButton callback={this.sortPizzas.bind(this)} buttonText={'Sort ' + this.state.sortIndicator} />
                 <Results listPrefix="🍕" pizzas={this.state.filteredPizzas} />
             </div>
         );
